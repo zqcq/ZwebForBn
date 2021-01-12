@@ -10,7 +10,7 @@ $(function(){
     var status = $("#status");
     var city = $("#city");
 
-    var j = $.ajax("http://8.135.33.3:8080",{
+    var j = $.ajax("http://127.0.0.1:8080",{
         data:JSON.stringify({"hash":"getdata"}),
         type :"post",
         contentType: "application/json charset=UTF-8",
@@ -78,7 +78,7 @@ function check(form) {
     data[key] = value;
     var data_json = JSON.stringify(data);
 
-    var con = $.ajax("http://8.135.33.3:8080",{
+    var con = $.ajax("http://127.0.0.1:8080",{
         data:data_json,
         type:"post",
         contentType:"application/json, charset=UTF-8",

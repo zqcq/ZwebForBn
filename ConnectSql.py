@@ -76,6 +76,7 @@ def getproblenform(str2):
         sqlCommand_h = r")fg order by ci  )d where d.dis = 1 order by ci "
         for x in list2:
             sqlCommand = sqlCommand + r"select *, row_number()  over(order by no) as rn,"+str(count)+r" as ci  From t_be_problem_form Where theme like '%"+x+r"%' or describe2 like '%" +x+r"%' UNION ALL "
+            count = count + 1
         sqlCommand = sqlCommand_q+ sqlCommand[:-10]+sqlCommand_h
         print(sqlCommand)
         cur.execute(sqlCommand)

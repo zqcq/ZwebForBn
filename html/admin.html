@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<link href="../static/CSS/admin.css" rel="stylesheet" type = "text/css">
+
+<title>管理页面</title>
+
+<body class = bg>
+    <div class = "left_window">
+        <div class =  "left_window_banner_area">
+            <p>查询条件</p>
+        </div>
+        <div class = "left_window_search_area">
+            <input type="date" class="begin_time"/>
+            <input type = "date" class="end_time"/>
+            <select class="problem_no">
+            </select>
+            <select class="problem_theme">
+            </select>
+            <select class="problem_status">
+            </select>
+            <input type="button" class="search_button" value="查询"/>
+        </div>
+    </div>
+
+    <div class = "right_window">
+        <div class = "right_window_banner_area">
+            <div class = "user_name_area">
+                <p>赵强</p>
+            </div>
+            <div class = "output_area" align = "right">
+                <input id = "change" type="button" value = "修改"/>
+                <input id = "output" type="button" value = "导出"/>          
+            </div>
+        </div>
+
+        <div class= "right_window_line">
+        </div>
+
+        <div class = "right_window_data_area">
+        </div>
+        <div class = "right_window_next_page_area">
+            <input type="button" value="下一页" class = "next_button"/>
+            <input type="button" value="上一页" class = "before_button"/>
+        </div>
+    </div>
+</body>

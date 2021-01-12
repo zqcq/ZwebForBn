@@ -2,7 +2,6 @@
 
 function check2(li)
 {
-  
   var getArr = li.split(",");
 
   $('.infomation_area').addClass('infomation_area_donghua');
@@ -17,7 +16,6 @@ function check2(li)
     $('.infomation_area').removeClass('infomation_area_donghua');
   },1000);
   
-
 }
 
 
@@ -26,7 +24,6 @@ function check(form)
     
     var search_info = $("#search_input");
     var search_info = search_info.val();
-
     var search_result_list = $(".search_result_list");
     
     
@@ -36,7 +33,7 @@ function check(form)
     }
 
     search_result_list.append('<img id = "loading" src="../static/pic/loading6.gif"/>')
-    var l = $.ajax("http://192.168.0.108:8080",{
+    var l = $.ajax("http://127.0.0.1:8080",{
     
         // 使用POST+JSON格式，JSON.stringify将提交的数据序列化
         data:JSON.stringify({"searchInfo":search_info,"hash":"search"}),
