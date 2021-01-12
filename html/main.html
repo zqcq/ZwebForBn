@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../static/CSS/main.css" type="text/css">
+<script src="../static/js/jq.js"></script>>
+<script src="../static/js/main.js"></script>
+<title>QA文档</title>
+</head><body class="bg">
+
+    <div class="banner" style="left: 0px;">  
+        <div class="banner_links">
+            <a id="contribute" href="http://8.135.33.3:8080/html/form.html">贡献</a>
+            <a id="list" href="http://8.135.33.3:8080/html/form.html">列表</a>
+            <a id="ranking_list" href="http://8.135.33.3:8080/html/form.html">排行榜</a>
+        </div>
+    </div>
+
+    <div class="search">
+        <form id="search_form">
+            <input id="search_input">
+            <input type="button" id="search_button" class="submit" value="搜索" onclick="return check(this.form);">
+        </form>
+    </div>
+    <div class="search_resule_area">
+        <div class="search_result_list">
+        </div>
+    
+    </div>
+
+    <div class="infomation_area">
+        <div class="infomation_describe">
+            <p id="infomation_describe_p"></p>
+        </div>
+            
+        <div class="infomation_solution">   
+            <p id="infomation_solution_p">请在左侧搜索栏输入关键词搜索!</p>
+        </div>
+        
+        <div class="other_infomation1" align="right">
+            <p id="problem_no"></p>&nbsp;&nbsp;&nbsp;
+            <p id="time"></p>
+        </div>
+
+        <div class="other_infomation2" align="right">
+            <p id="insert_branch"></p>&nbsp;&nbsp;&nbsp;
+            <p id="insert_user"></p>&nbsp;&nbsp;&nbsp;
+            <p id="problem_status"></p>
+        </div>
+
+    </div>
+       
+
+</body></html>
