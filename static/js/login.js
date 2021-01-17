@@ -6,7 +6,7 @@ function check(form) {
     // 使用jQuery获得账户和密码的DOM节点
     var accountName = $("#accountName"), password = $("#password");
     var accountName = accountName.val(), password = password.val();
-
+    var urlAddress = window.location.href;
     // 判断账号密码是否为空，为空则返回false给FORM，终止执行提交操作。
     if (!accountName || accountName == "") {
         showMsg("请输入用户名!");
@@ -32,7 +32,7 @@ function check(form) {
         // 提交成功后，获得服务端返回的结果，为"suc"则跳转到数据页，否则不跳转，显示返回的错误信息。
         success:function (msg) {
             if (msg["code"] == "suc"){
-              window.location.href = "../html/form.html";
+              window.open(urlAddress,"_self");
             }
             else{
               showMsg(msg["code"]);

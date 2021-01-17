@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "C:/Users/ZQ/Desktop/BN/Zweb/html/admin.html",
+            "url": "C:/Users/ZQ/Desktop/BN/Zweb/html/manage.html",
             "webRoot": "${workspaceFolder}"
         }
     ]

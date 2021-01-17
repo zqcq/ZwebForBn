@@ -8,6 +8,8 @@ from web.template import ALLOWED_AST_NODES
 from ConnectSql import insertForm
 from ConnectSql import getdata
 from ConnectSql import getproblenform
+from ConnectSql import getuserinfo
+from ConnectSql import getproblenform2
 import random
 from datetime import datetime
 from JsonDateEncoder import DateEncoder
@@ -30,6 +32,7 @@ urls = (
     #这一句配置了CSS/JS等文件夹的目录
     '/(js|css|images)/(.*)', 'static',
     "/html/form.html","form",
+    "/html/manage.html","manage",
     "/kill","Kill"
 
 )
@@ -40,7 +43,7 @@ render = web.template.render('html/')
 app = web.application(urls, globals())
 
 # 建立session文件夹，这一句可以让web.py给客户端response一个唯一的seesion会话ID
-session = web.session.Session(app, web.session.DiskStore('ses'), initializer={'login': False})
+session = web.session.Session(app, web.session.DiskStore('ses'), initializer={'login': False, 'userName':"未登录", 'userId':"0"})
 
 
 # 此类用于清除session（session.kill()），并跳转到登录页。
@@ -51,6 +54,15 @@ class Kill():
         session.kill()
         return render.login()
 
+class manage():
+    def GET(self):
+        web.header("Access-Control-Allow-Origin", "*")
+        web.header("Access-Control-Allow-Methods", "GET, POST,PUT,DELETE,OPTIONS")
+        if session.login is True:
+            return render.manage(session.userName, session.userId)
+        return render.login()
+
+    
 
 # 登录成功后返回的页面
 class form():
@@ -60,7 +72,7 @@ class form():
         web.header("Access-Control-Allow-Methods", "GET, POST,PUT,DELETE,OPTIONS")
 
         if session.login is True:
-            return render.form()
+            return render.form(session.userName)
         return render.login()
 
 
@@ -86,9 +98,13 @@ class Admin():
 
             # “hash”==“login” 登录请求
             if datas["hash"] == "login":
-                if datas['acc'] == "admin" and datas['pass'] == "admin":
-                    session.login = True
-                    return smsg
+                sql_return = getuserinfo(datas['acc'])
+                if sql_return["code"] == "suc":
+                    if datas['pass'] == sql_return["data"][2]:
+                        session.login = True
+                        session.userName = sql_return["data"][1]
+                        session.userId = sql_return["data"][0]
+                        return smsg
                 return emsg
 
             # “hash” == "insertform" 上传表单
@@ -118,8 +134,14 @@ class Admin():
                     return json.dumps(getdata())
                 else:
                     return timeOutMsg
+
             elif datas["hash"] == "search":
                 return(json.dumps(getproblenform(datas["searchInfo"]),cls=DateEncoder))
+
+            elif datas["hash"] == "getproblemform": 
+                sql_return = getproblenform2(datas["data"])
+                return json.dumps(sql_return, cls = DateEncoder)
+               
 
 
 if __name__ == "__main__":

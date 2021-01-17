@@ -1,0 +1,66 @@
+$def with (userName,userId)
+
+    <!DOCTYPE html>
+
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <link href="../static/CSS/manage.css" rel="stylesheet" type = "text/css">
+    <script src="../static/js/jq.js"></script>
+    <script src="../static/js/manage.js"></script>
+
+    <title>管理页面</title>
+
+    <body class = bg>
+        <div class = "left_window">
+            <div class =  "left_window_banner_area">
+                <p>查询条件</p>
+            </div>
+            <div class = "left_window_search_area">
+                <form class = search_form>
+                    <input type="date" class="begin_time"/>
+                    <input type = "date" class="end_time"/>
+                    <input class="problem_no">
+                    </input>
+                    <input class="problem_theme">
+                    </input>
+                    <select class="problem_status">
+                        <option value = "%%">全部</option>
+                    </select>
+                    <input type="button" class="search_button" value="查询" onclick="return check()"/>
+                </form>
+            </div>
+        </div>
+
+        <div class = "right_window">
+            <div class = "right_window_banner_area">
+                <div class = "user_name_area">
+                    <p id="username">$userName</p>
+                    <p style="display:none;" id="userid" >$userId</p>
+                </div>
+                <div class = "output_area" align = "right">
+                    
+                    <input id = "output" type="button" value = "导出"/>          
+                </div>
+            </div>
+
+            <div class= "right_window_line">
+            </div>
+
+            <div class = "right_window_data_area">
+                <table class = "data_table" >
+                    <tr class = "data_tr_head">
+                        <td class = "no_td">问题编号</td>
+                        <td class = "system_td">相关系统</td>
+                        <td class = theme_td>问题主题</td>
+                        <td class = "time_td">修改日期</td>
+                        <td class = "status_td">问题状态</td> 
+                        <td class = "change_td">操作</td>
+                    </tr>
+                    
+                </table>
+            </div>
+            <div class = "right_window_next_page_area">
+                <input type="button" value="下一页" class = "next_button"/>
+                <input type="button" value="上一页" class = "before_button"/>
+            </div>
+        </div>
+    </body>

@@ -86,6 +86,37 @@ def getproblenform(str2):
     except Exception as e:
         return {"code":"fail", "data":[]}
 
+def getuserinfo(userid):
+
+    try:
+        con = connectsql()
+        cur = con.cursor()
+
+        sqlCommand = "select * from t_be_user_info where user_no = '" + userid +"'"
+        cur.execute(sqlCommand)
+        row = cur.fetchall()
+        
+        return {"code":"suc", "data":list(row[0])}
+    except Exception as e:
+        print(e)
+        return {"code":"feil"}
+
+
+def getproblenform2(DataJson):
+    try:
+        con = connectsql()
+        cur = con.cursor()
+        print(DataJson["user_no"],DataJson["begin_time"],DataJson["end_time"],DataJson["no"],DataJson["theme"],DataJson["status"])
+        sqlCommand = r"select * from t_be_problem_form where user_no = '" + DataJson["user_no"] + r"' and time between '" +DataJson["begin_time"]+ r"' and '"+DataJson["end_time"]+ r"' and no like '%"+DataJson["no"]+ r"%' and theme like '%" +DataJson["theme"]+ r"%' and status like '%"+DataJson["status"]+r"%'"  
+        print(sqlCommand)
+        cur.execute(sqlCommand)
+        row = cur.fetchall()
+        con.close()
+        return {"code":"suc", "data":row}
+    except Exception as e:
+        print(e)
+        return {"code":"fail","data":[]}
+        
 
 
 
