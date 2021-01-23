@@ -1,8 +1,3 @@
-html,body{
-    overflow: hidden;
-    height: 100%;
-    }
-
 
 .bg
 {
@@ -23,6 +18,7 @@ html,body{
 
 .left_window_banner_area
 {
+    line-height: 90px;
     position: absolute;
     background-color:darkorange;
     width: 180px;
@@ -55,7 +51,7 @@ html,body{
     color: white;
     margin-left: 50px;
     width: 150px;
- 
+    line-height: 90px;
     height: 90px;
 }
 
@@ -154,4 +150,69 @@ html,body{
     width: 125px;
     height: 30px;
     background-color: darkorange;
+}
+.data_table
+{
+  
+    font-size: 12px;
+    table-layout: fixed;
+    width: 100%;
+}
+.data_tr_head
+{
+    font-size: 14px;
+    color: white;
+    text-align: center;
+    margin-left:0px;
+    margin-right: 0px;
+    background-color: rgba(0, 0,0, 0.2)
+}
+.data_table td
+{
+    list-style:armenian;
+    color: white;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    -o-text-overflow:ellipsis;
+    -moz-text-overflow: ellipsis;
+    -webkit-text-overflow: ellipsis;
+}
+
+.no_td
+{
+    width: 15%;
+}
+.system_td
+{
+    width: 10%;
+}
+.theme_td
+{
+    width: 40%;
+}
+.time_td
+{
+    width: 15%;
+}
+.status_td
+{
+    width: 10%;
+}
+
+.change_td
+{
+
+    width: 10%;
+}
+
+.change_logo
+{
+    width: 10px;
+    height: 10px;
+}
+.delete_logo
+{
+    width: 10px;
+    height: 10px;
 }

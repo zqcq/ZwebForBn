@@ -1,6 +1,6 @@
-$def with (userName)
+$def with (userName,userId)
 
- 
+    
     <!DOCTYPE html>
 
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
@@ -12,14 +12,11 @@ $def with (userName)
     <title>中山运维-系统支持事件追踪表</title>
     <body class = "bd">
         <div class = "main">
-
             <div class="banner" style="left: 0px;">  
-                <div class="banner_imgs">
-                    <img id="txt_logo" src="../static/pic/txt_Logo.png" />
-                    <img id="txt_logo" src="../static/pic/phone_Logo.png" />
-                    <img id="txt_logo" src="../static/pic/print_Logo.png" />
-                    <img id="txt_logo" src="../static/pic/config_Logo.png" />
-                    <img id="txt_logo" src="../static/pic/mes_Logo.png" />
+                <div class="banner_link">
+                    <a id="main" href="http://8.135.33.3:8080">首页</a>
+                    <a id="list" href="http://8.135.33.3:8080/html/manage.html">我的</a>
+                    <a id="ranking_list" href="http://8.135.33.3:8080">排行榜</a>
                 </div>
             </div>
 
@@ -79,6 +76,14 @@ $def with (userName)
                             <label>提交城市&nbsp</label>
                             <select class="short_input" id="city"></select>
                         </div>
+                        <div class="div_interface_people">
+                            <label>支持人&nbsp</label>
+                            <input class="short_input" id="interface_people" value = "无">
+                        </div>
+
+                        <div class="div_user_no">
+                            <input class="short_input" id="user_no" value=$userId readonly="readonly" type = "hidden" />
+                        </div>
                         <input type="reset" id="reset" style="display:none"/>
                     </form>    
                 </div>
@@ -86,6 +91,13 @@ $def with (userName)
 
             <div class="btn">
                 <input type="button" id="submit" class="submit" value="提交表单" onclick="return check(this.form);">
+            </div>
+
+            <div class="notes">
+                <p>【故障主题】应尽量简略、准确的描述故障现象，如：ERP系统启动报错210D。</p>
+                <p>【问题描述】应尽量详尽的描述问题细节,尽可能多的包含相关关键字，以便检索。</p>
+                <p>【解决方案】应清晰的描述解决步骤，让访问者能看得明白。</p>
+                <p>如需提交等待二三线技术支持的问题，在【支持人】处填写对接人员，以便后期跟进。</p>
             </div>
         </div>
         

@@ -10,6 +10,8 @@ from ConnectSql import getdata
 from ConnectSql import getproblenform
 from ConnectSql import getuserinfo
 from ConnectSql import getproblenform2
+from ConnectSql import getproblenform3
+from ConnectSql import updateproblem
 import random
 from datetime import datetime
 from JsonDateEncoder import DateEncoder
@@ -33,7 +35,9 @@ urls = (
     '/(js|css|images)/(.*)', 'static',
     "/html/form.html","form",
     "/html/manage.html","manage",
-    "/kill","Kill"
+    "/kill","Kill",
+    "/html/change.html","change"
+
 
 )
 
@@ -54,6 +58,21 @@ class Kill():
         session.kill()
         return render.login()
 
+class change():
+    def GET(self):
+        web.header('content-type', 'text/html; charset=utf-8', unique=True)
+        web.header("Access-Control-Allow-Origin", "*")
+        web.header("Access-Control-Allow-Methods", "GET, POST,PUT,DELETE,OPTIONS")
+        if session.login is True:
+            data = web.input()
+            sql_return = getproblenform3(data.id)
+            if sql_return["data"][15] == session.userId:
+                print(sql_return["data"])
+                return render.change(sql_return["data"])
+            else:
+                return "你无权编辑这个问题！"
+        return render.login()
+
 class manage():
     def GET(self):
         web.header("Access-Control-Allow-Origin", "*")
@@ -72,7 +91,7 @@ class form():
         web.header("Access-Control-Allow-Methods", "GET, POST,PUT,DELETE,OPTIONS")
 
         if session.login is True:
-            return render.form(session.userName)
+            return render.form(session.userName,session.userId)
         return render.login()
 
 
@@ -115,8 +134,7 @@ class Admin():
                             NullMsg = json.dumps({"code":"NullMsg", "err":key+"值为空"})
                             return NullMsg
                     del datas["hash"]
-                    datas["no"] = datetime.now().strftime('%Y%m%d%H%M%S') + str(random.randint(10000,99999))
-                    datas["city"] = "中山仓"
+                    datas["no"] = datetime.now().strftime('%Y%m%d%H%M%S') + str(random.randint(10000,99999))                   
                     datas["time"] = datetime.now()
                     # 调用数据库请求方法，返回请求到的数据
                     
@@ -140,7 +158,26 @@ class Admin():
 
             elif datas["hash"] == "getproblemform": 
                 sql_return = getproblenform2(datas["data"])
+                
                 return json.dumps(sql_return, cls = DateEncoder)
+
+            elif datas["hash"] == "update":
+                if session.login is True:
+                
+                    for key, value in datas.items():
+                        if value == "":
+                            NullMsg = json.dumps({"code":"NullMsg", "err":key+"值为空"})
+                            return NullMsg
+                    del datas["hash"]
+                    datas["done_time"] = datetime.now()
+                    
+                    re = updateproblem(datas)
+                    if(re == 0 ):
+                        return smsg
+                    else:
+                        return re
+                else:
+                    return timeOutMsg
                
 
 

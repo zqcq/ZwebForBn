@@ -32,7 +32,9 @@ def insertForm(DataJson):
                         DataJson["status"], 
                         DataJson["acceptor"], 
                         DataJson["time"], 
-                        DataJson["city"])
+                        DataJson["city"],
+                        DataJson["interface_people"],
+                        DataJson["user_no"])
                     )
         con.commit()
         con.close()
@@ -60,7 +62,6 @@ def getdata():
 
         row.insert(0, key)
         li.append(row)
-    print(li)
     con.close()
     return li
 
@@ -70,7 +71,6 @@ def getproblenform(str2):
         cur = con.cursor()
         count = 1
         list2 = splitStr(str2)
-        print(list2)
         sqlCommand = ""
         sqlCommand_q = r"select  top 20 * from (SELECT top 100 percent  *,ROW_NUMBER() OVER (PARTITION  BY no ORDER BY  ci) AS dis   from ("
         sqlCommand_h = r")fg order by ci  )d where d.dis = 1 order by ci "
@@ -81,7 +81,6 @@ def getproblenform(str2):
         print(sqlCommand)
         cur.execute(sqlCommand)
         row = cur.fetchall()
-        print(row)
         return {"code":"suc","data":row}
     except Exception as e:
         return {"code":"fail", "data":[]}
@@ -106,9 +105,9 @@ def getproblenform2(DataJson):
     try:
         con = connectsql()
         cur = con.cursor()
-        print(DataJson["user_no"],DataJson["begin_time"],DataJson["end_time"],DataJson["no"],DataJson["theme"],DataJson["status"])
-        sqlCommand = r"select * from t_be_problem_form where user_no = '" + DataJson["user_no"] + r"' and time between '" +DataJson["begin_time"]+ r"' and '"+DataJson["end_time"]+ r"' and no like '%"+DataJson["no"]+ r"%' and theme like '%" +DataJson["theme"]+ r"%' and status like '%"+DataJson["status"]+r"%'"  
-        print(sqlCommand)
+        
+        sqlCommand = r"select * from t_be_problem_form where user_no = '" + DataJson["user_no"] + r"' and time between '" +DataJson["begin_time"]+ r"' and '"+DataJson["end_time"]+ " 23:59:59"+ r"' and no like '%"+DataJson["no"]+ r"%' and theme like '%" +DataJson["theme"]+ r"%' and status like '%"+DataJson["status"]+r"%'"  
+        
         cur.execute(sqlCommand)
         row = cur.fetchall()
         con.close()
@@ -116,8 +115,51 @@ def getproblenform2(DataJson):
     except Exception as e:
         print(e)
         return {"code":"fail","data":[]}
-        
 
+def getproblenform3(no):
+   
+    try:
+        con = connectsql()
+        cur = con.cursor()
+        
+        sqlcommand = r"select * from t_be_problem_form where no ='" + no + r"'"
+    
+        cur.execute(sqlcommand)
+        row = cur.fetchall()
+        row = list(row[0])
+        row[6] = row[6].replace("<br/>", "\n")
+        row[8] = row[8].replace("<br/>", "\n")
+        print(row)
+        return {"code":"suc", "data":row}
+    except Exception as e:
+        print(e)
+        return {"code":"feil"}
+    con.close()
+     
+
+def updateproblem(DataJson):
+    try:
+        con = connectsql()
+        cur = con.cursor()
+        cur.callproc('UpdateProblem',
+                        (DataJson["no"], 
+                        DataJson["theme"],
+                        DataJson["branch"], 
+                        DataJson["user"], 
+                        DataJson["direct_system"],
+                        DataJson["relation_system"], 
+                        DataJson["describe2"], 
+                        DataJson["class"], 
+                        DataJson["solution2"], 
+                        DataJson["status"], 
+                        DataJson["interface_people"],
+                        DataJson["done_time"])
+                    )
+        con.commit()
+        con.close()
+        return 0
+    except Exception as e:
+        return e    
 
 
 

@@ -1,47 +1,62 @@
-<!DOCTYPE html>
+$def with (userName,userId)
 
-<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-<link href="../static/CSS/admin.css" rel="stylesheet" type = "text/css">
+    <!DOCTYPE html>
 
-<title>管理页面</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <link href="../static/CSS/admin.css" rel="stylesheet" type = "text/css">
+    <script src="../static/js/jq.js"></script>
 
-<body class = bg>
-    <div class = "left_window">
-        <div class =  "left_window_banner_area">
-            <p>查询条件</p>
-        </div>
-        <div class = "left_window_search_area">
-            <input type="date" class="begin_time"/>
-            <input type = "date" class="end_time"/>
-            <select class="problem_no">
-            </select>
-            <select class="problem_theme">
-            </select>
-            <select class="problem_status">
-            </select>
-            <input type="button" class="search_button" value="查询"/>
-        </div>
-    </div>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../static/bootstrap-table-master/dist/bootstrap-table.js"></script>
+    <script src="../static/js/admin.js"></script>
+    <link rel="stylesheet" href="../static/bootstrap-table-master/dist/bootstrap-table.css">
 
-    <div class = "right_window">
-        <div class = "right_window_banner_area">
-            <div class = "user_name_area">
-                <p>赵强</p>
+
+
+    <title>管理页面</title>
+
+    <body class = bg>
+        <div class = "left_window">
+            <div class =  "left_window_banner_area">
+                <p>查询条件</p>
             </div>
-            <div class = "output_area" align = "right">
-                <input id = "change" type="button" value = "修改"/>
-                <input id = "output" type="button" value = "导出"/>          
+            <div class = "left_window_search_area">
+                <form class = search_form>
+                    <input type="date" class="begin_time"/>
+                    <input type = "date" class="end_time"/>
+                    <input class="problem_no">
+                    </input>
+                    <input class="problem_theme">
+                    </input>
+                    <select class="problem_status">
+                        <option value = "%%">全部</option>
+                    </select>
+                    <input type="button" class="search_button" value="查询" onclick="return check()"/>
+                </form>
             </div>
         </div>
 
-        <div class= "right_window_line">
-        </div>
+        <div class = "right_window">
+            <div class = "right_window_banner_area">
+                <div class = "user_name_area">
+                    <p id="username">$userName</p>
+                    <p style="display:none;" id="userid" >$userId</p>
+                </div>
+                <div class = "output_area" align = "right">
+                    
+                    <input id = "output" type="button" value = "导出"/>          
+                </div>
+            </div>
 
+            <div class= "right_window_line">
+            </div>
+        
         <div class = "right_window_data_area">
-        </div>
-        <div class = "right_window_next_page_area">
-            <input type="button" value="下一页" class = "next_button"/>
-            <input type="button" value="上一页" class = "before_button"/>
+            <table class = "table table-bordered" id ="table_page" data-pagination="true" data-side-pagination="client" data-page-size = "3"> 
+            </table>
+            <input type="button" value="生成" onclick="return check()">
         </div>
     </div>
 </body>

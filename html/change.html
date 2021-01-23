@@ -1,5 +1,103 @@
-<!DOCTYPE html>
+$def with (list)
+
+ 
+    <!DOCTYPE html>
 
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <link rel="stylesheet" href="../static/css/change.css" type = "text/css" />
+    <script src="../static/js/jq.js"></script>
+    <script src="../static/js/change.js"></script>
 
-    <p>建设中</p>
+
+    <title>中山运维-系统支持事件追踪表</title>
+    <body class = "bd">
+        <div class = "main">
+
+            <div class="banner" style="left: 0px;">  
+                <div class="banner_imgs">
+                    <img id="txt_logo" src="../static/pic/txt_Logo.png" />
+                    <img id="txt_logo" src="../static/pic/phone_Logo.png" />
+                    <img id="txt_logo" src="../static/pic/print_Logo.png" />
+                    <img id="txt_logo" src="../static/pic/config_Logo.png" />
+                    <img id="txt_logo" src="../static/pic/mes_Logo.png" />
+                </div>
+            </div>
+
+            <div class="head">     
+                <p id="head_text">  &nbsp应用系统支持事件追踪表(修改)&nbsp   </p>
+            </div>
+
+            <div class="form_bg">
+                <div class="form">
+                    <form>
+                        <div class="div_theme">
+                            <label>故障主题&nbsp</label>
+                            <input class="long_input" id="theme" maxlength="23" value = "$list[1]"></input>
+                        </div>
+                        <div class="div_branch">
+                            <label>提出部门&nbsp</label>
+                            <select class="short_input" id="branch"><option value="$list[2]">$list[2]</option></option></select>
+                        </div>
+                        <div class="div_user">
+                            <label>提出用户&nbsp</label>
+                            <input class="short_input" id="user" maxlength="4" value = "$list[3]">
+                        </div>
+                        <div class="div_direct_system">
+                            <label>直接系统&nbsp</label>
+                            <select class="short_input" id="direct_system" ><option value="$list[4]">$list[4]</option></select>
+                        </div>
+                        <div class="div_relation_system">
+                            <label>关联系统&nbsp</label>
+                            <select class="short_input" id="relation_system"><option value="$list[5]">$list[5]</option></select>
+                        </div>
+                        <div class="div_describe">
+                            <label>问题描述&nbsp</label>
+                        </div>
+                        <div class="div_describe2">
+                            <textarea class="high_input" maxlength="250" id="describe2" resize: none; >$list[6]</textarea>
+                        </div>
+                        <div class="div_class">
+                            <label>问题分类&nbsp</label>
+                            <select class="short_input" id="class" ><option value="$list[7]">$list[7]</option></select>
+                        </div>
+
+                        <div class="div_solution">
+                            <label>解决方案&nbsp</label>
+                        </div>
+                        <div class="div_solution2">
+                            <textarea class="high_input" maxlength="250" id="solution2" resize: none;>$list[8]</textarea>
+                        </div>
+                        <div class="div_status">
+                            <label>当前状态&nbsp</label>
+                            <select class="short_input" id="status" ><option value="$list[9]">$list[9]</option></select>
+                        </div>
+                        <div class="div_acceptor">
+                            <label>受理人&nbsp</label>
+                            <input class="short_input" id="acceptor"  readonly = "readonly" value = "$list[10]">
+                        </div>
+                        <div class="div_city">
+                            <label>提交城市&nbsp</label>
+                            <select class="short_input" id="city" ><option value="$list[12]">$list[12]</option></select>
+                        </div>
+                        <div class="div_interface_people">
+                            <label>支持人&nbsp</label>
+                            <input class="short_input" id="interface_people" value = "$list[13]">
+                        </div>
+
+                        <div class="div_user_no">
+                            <input class="short_input" id="user_no"  readonly="readonly" type = "hidden" value = "$list[15]">
+                        </div>
+                        <div class="div_user_no">
+                            <input class="short_input" id="no"  readonly="readonly" type = "hidden" value = "$list[0]">
+                        </div>
+                        <input type="reset" id="reset" style="display:none"/>
+                    </form>    
+                </div>
+            </div>
+
+            <div class="btn">
+                <input type="button" id="submit" class="submit" value="提交修改" onclick="return check(this.form);">
+            </div>
+        </div>
+        
+    </body>
