@@ -103,11 +103,16 @@ def getuserinfo(userid):
 
 def getproblenform2(DataJson):
     try:
+
         con = connectsql()
         cur = con.cursor()
-        
-        sqlCommand = r"select * from t_be_problem_form where user_no = '" + DataJson["user_no"] + r"' and time between '" +DataJson["begin_time"]+ r"' and '"+DataJson["end_time"]+ " 23:59:59"+ r"' and no like '%"+DataJson["no"]+ r"%' and theme like '%" +DataJson["theme"]+ r"%' and status like '%"+DataJson["status"]+r"%'"  
-        
+
+        if DataJson["user_no"] == "1001":
+
+            sqlCommand = r"select * from t_be_problem_form where user_no like '%%' " + r"and time between '" +DataJson["begin_time"]+ r"' and '"+DataJson["end_time"]+ " 23:59:59"+ r"' and no like '%"+DataJson["no"]+ r"%' and theme like '%" +DataJson["theme"]+ r"%' and status like '%"+DataJson["status"]+r"%'"
+        else:
+            sqlCommand = r"select * from t_be_problem_form where user_no = '" + DataJson["user_no"] + r"' and time between '" +DataJson["begin_time"]+ r"' and '"+DataJson["end_time"]+ " 23:59:59"+ r"' and no like '%"+DataJson["no"]+ r"%' and theme like '%" +DataJson["theme"]+ r"%' and status like '%"+DataJson["status"]+r"%'"
+
         cur.execute(sqlCommand)
         row = cur.fetchall()
         con.close()

@@ -33,7 +33,7 @@ function check(form)
     }
 
     search_result_list.append('<img id = "loading" src="../static/pic/loading6.gif"/>')
-    var l = $.ajax("http://127.0.0.1:8080",{
+    var l = $.ajax("http://8.135.33.3:8080",{
     
         // 使用POST+JSON格式，JSON.stringify将提交的数据序列化
         data:JSON.stringify({"searchInfo":search_info,"hash":"search"}),

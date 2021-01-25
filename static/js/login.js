@@ -20,7 +20,7 @@ function check(form) {
     }
 
     // 账号密码不为空，使用jQ的AJAX()用来提交登录信息
-    var l = $.ajax("http://127.0.0.1:8080",{
+    var l = $.ajax("http://8.135.33.3:8080",{
 
         // 使用POST+JSON格式，JSON.stringify将提交的数据序列化
         data:JSON.stringify({"pass":password,"acc":accountName,"hash":"login"}),

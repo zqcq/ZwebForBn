@@ -11,7 +11,7 @@ $(function(){
 
     var ProblemStatus = $(".problem_status_value");
     $("#table_page").bootstrapTable();
-    var j = $.ajax("http://127.0.0.1:8080",{
+    var j = $.ajax("http://8.135.33.3:8080",{
         data:JSON.stringify({"hash":"getdata"}),
         type :"post",
         contentType: "application/json charset=UTF-8",
@@ -44,7 +44,7 @@ function check() {
     var Status = $(".problem_status_value").val();
 
 
-    var j = $.ajax("http://127.0.0.1:8080",{
+    var j = $.ajax("http://8.135.33.3:8080",{
         data:JSON.stringify({"hash":"getproblemform","data":{"user_no":UserNo, "begin_time":BeginTime,"end_time":EndTime,"no":ProblemNo,"theme":Problentheme,"status":Status}}),
         type :"post",
         async :false,
@@ -87,6 +87,7 @@ function check() {
                         showExport: true,  //是否显示导出按钮
                         buttonsAlign:"right",  //按钮位置
                         exportTypes:['excel'],  //导出文件类型
+                        exportDataType: 'all', // 导出所有页
                         Icons:'glyphicon-export',
                       
                         columns:[{field:"id",title:"问题编号",width:150},
